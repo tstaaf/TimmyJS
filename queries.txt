@@ -1,37 +1,19 @@
 ﻿-- Fråga 1: Vilka filmer som firman äger, inklusive data om filmen.
 
-<<<<<<< HEAD
-SELECT m.movieID, movieName, `Year`, directorsID Directors, group_concat(DISTINCT mah.ActorsID) Actors, GenreID Genre 
-FROM movies m
-
-INNER JOIN movies_has_actors mah ON m.movieID = mah.movieID
-
-INNER JOIN movies_has_genre mhg ON m.movieID = mhg.movieID
-
-=======
-
-
 SELECT m.movieID, movieName, `Year`, GROUP_CONCAT(distinct d.FirstName, ' ', d.LastName) Director, GROUP_CONCAT(distinct a.FirstName, ' ', a.LastName) Actors, g.`Name` Genre
 
 FROM movies m
 
-
 INNER JOIN movies_has_actors mah ON m.movieID = mah.movieID
-
 
 INNER JOIN actors a ON mah.ActorsID = a.ActorsID
 
-
 INNER JOIN movies_has_genre mhg ON m.movieID = mhg.movieID
-
 
 INNER JOIN genre g ON mhg.GenreID = g.GenreID
 
-
 INNER JOIN directors d ON m.directorsID = d.DirectorsID
 
-
->>>>>>> feature_list_all_movies
 GROUP BY m.movieID;
 
 -- Fråga 2: Vilka filmer som finns i en viss genre.
@@ -43,7 +25,7 @@ INNER JOIN movies_has_genre mhg ON m.movieID = mhg.movieID
 
 INNER JOIN genre g ON mhg.GenreID = g.GenreID
 
-WHERE g.`Name`= 'Drama'
+WHERE g.`Name`= 'Drama';
 
 -- Fråga : Vilka filmer som är uthyrda, vem som hyrde dem (kund) och vem som hyrde ut dem (anställd).
 
