@@ -27,9 +27,19 @@ INNER JOIN genre g ON mhg.GenreID = g.GenreID
 
 WHERE g.`Name`= 'Drama';
 
--- Fråga : Vilka filmer som är uthyrda, vem som hyrde dem (kund) och vem som hyrde ut dem (anställd).
+-- Fråga 3 : Vilka filmer som är uthyrda, vem som hyrde dem (kund) och vem som hyrde ut dem (anställd).
 
-SELECT * FROM products;
+SELECT m.movieName, e.employeeID, GROUP_CONCAT(c.FirstName,' ' , c.LastName) Renter, m.rented 
+FROM movies m
+
+
+INNER JOIN customers c ON c.customerID = m.customerID
+
+INNER JOIN employees e ON e.employeeID = m.employeeID
+GROUP BY m.movieName
+
+
+HAVING m.rented = 1;
 
 -- Fråga 4: Vilka filmer som har gått över tiden, dvs filmer som inte har blivit återlämnade trots att de borde vara det, tillsammans med namnet på kunden som har hyrt den.
 
