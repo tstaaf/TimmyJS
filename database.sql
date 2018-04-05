@@ -36,7 +36,7 @@ CREATE TABLE `actors` (
 
 LOCK TABLES `actors` WRITE;
 /*!40000 ALTER TABLE `actors` DISABLE KEYS */;
-INSERT INTO `actors` VALUES (1,'Emily','Blunt'),(2,'Noah','Jupe'),(3,'Tom','Hanks'),(4,'Matt','Damon'),(5,'Mark','Hamil'),(6,'Harrison','Ford'),(7,'Carrie','Fisher'),(8,'Liam','Neeson'),(9,'Jeremy','Irvine'),(10,'Emily','Watson'),(11,'Adrien','Brody'),(12,'Thomas','Kretschmann'),(13,' François','Cluzet'),(14,'Omar','Sy'),(15,'Tom','Hanks'),(16,'Robin','Wright');
+INSERT INTO `actors` VALUES (1,'Emily','Blunt'),(2,'Noah','Jupe'),(3,'Tom','Hanks'),(4,'Matt','Damon'),(5,'Mark','Hamil'),(6,'Harrison','Ford'),(7,'Carrie','Fisher'),(8,'Liam','Neeson'),(9,'Jeremy','Irvine'),(10,'Emily','Watson'),(11,'Adrien','Brody'),(12,'Thomas','Kretschmann'),(13,'François','Cluzet'),(14,'Omar','Sy'),(15,'Tom','Hanks'),(16,'Robin','Wright');
 /*!40000 ALTER TABLE `actors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,6 +141,78 @@ INSERT INTO `genre` VALUES (1,'Thriller'),(2,'Drama'),(3,'Adventure'),(4,'Comedy
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `listadventuregenre`
+--
+
+DROP TABLE IF EXISTS `listadventuregenre`;
+/*!50001 DROP VIEW IF EXISTS `listadventuregenre`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `listadventuregenre` AS SELECT 
+ 1 AS `movieName`,
+ 1 AS `Name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `listallemployees`
+--
+
+DROP TABLE IF EXISTS `listallemployees`;
+/*!50001 DROP VIEW IF EXISTS `listallemployees`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `listallemployees` AS SELECT 
+ 1 AS `employeeID`,
+ 1 AS `FirstName`,
+ 1 AS `LastName`,
+ 1 AS `Movies_rented`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `listallmovies`
+--
+
+DROP TABLE IF EXISTS `listallmovies`;
+/*!50001 DROP VIEW IF EXISTS `listallmovies`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `listallmovies` AS SELECT 
+ 1 AS `movieID`,
+ 1 AS `movieName`,
+ 1 AS `Year`,
+ 1 AS `Director`,
+ 1 AS `Actors`,
+ 1 AS `Genre`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `listspecificgenre`
+--
+
+DROP TABLE IF EXISTS `listspecificgenre`;
+/*!50001 DROP VIEW IF EXISTS `listspecificgenre`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `listspecificgenre` AS SELECT 
+ 1 AS `movieName`,
+ 1 AS `Name`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `movieoverdue`
+--
+
+DROP TABLE IF EXISTS `movieoverdue`;
+/*!50001 DROP VIEW IF EXISTS `movieoverdue`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `movieoverdue` AS SELECT 
+ 1 AS `movieID`,
+ 1 AS `movieName`,
+ 1 AS `Customer`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `movies`
 --
 
@@ -156,7 +228,7 @@ CREATE TABLE `movies` (
   `directorsID` int(11) DEFAULT NULL,
   `rentDate` date DEFAULT NULL,
   `returnDate` date DEFAULT NULL,
-  `rented` tinyint(4) DEFAULT '0',
+  `rented` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`movieID`),
   KEY `fk_movies_customers1_idx` (`customerID`),
   KEY `fk_movies_employees1_idx` (`employeeID`),
@@ -173,7 +245,7 @@ CREATE TABLE `movies` (
 
 LOCK TABLES `movies` WRITE;
 /*!40000 ALTER TABLE `movies` DISABLE KEYS */;
-INSERT INTO `movies` VALUES (1,'A Quiet Place',2018,NULL,NULL,1,NULL,NULL,0),(2,'Saving Private Ryan',1998,NULL,NULL,2,NULL,NULL,0),(3,'Star Wars: Episode IV - A New Hope',1977,NULL,NULL,3,NULL,NULL,0),(4,'Star Wars: Episode V - The Empire Strikes Back',1980,NULL,NULL,4,NULL,NULL,0),(5,'Star Wars: Episode VI - Return of the Jedi',1983,NULL,NULL,5,NULL,NULL,0),(6,'Raiders of the Lost Ark',1981,NULL,NULL,2,NULL,NULL,0),(7,'Indiana Jones and the Temple of Doom',1984,NULL,NULL,2,NULL,NULL,0),(8,'Indiana Jones and the Last Crusade',1989,NULL,NULL,2,NULL,NULL,0),(9,'Schindler\'s List',1993,NULL,NULL,2,NULL,NULL,0),(10,'War Horse',2011,NULL,NULL,2,NULL,NULL,0),(11,'The Pianist',2002,NULL,NULL,6,NULL,NULL,0),(12,'Intouchables',2011,NULL,NULL,7,NULL,NULL,0),(13,'Forest Gump',1994,NULL,NULL,8,NULL,NULL,0);
+INSERT INTO `movies` VALUES (1,'A Quiet Place',2018,5,2,1,'2018-04-05','2018-04-09',1),(2,'Saving Private Ryan',1998,1,1,2,'2018-04-01','2018-04-05',1),(3,'Star Wars: Episode IV - A New Hope',1977,3,1,3,'2018-04-02','2018-04-06',1),(4,'Star Wars: Episode V - The Empire Strikes Back',1980,3,1,4,'2018-04-02','2018-04-06',1),(5,'Star Wars: Episode VI - Return of the Jedi',1983,NULL,1,5,NULL,NULL,0),(6,'Raiders of the Lost Ark',1981,2,2,2,'2018-03-30','2018-04-03',1),(7,'Indiana Jones and the Temple of Doom',1984,2,2,2,'2018-03-30','2018-04-03',1),(8,'Indiana Jones and the Last Crusade',1989,2,2,2,'2018-03-30','2018-04-03',1),(9,'Schindler\'s List',1993,1,1,2,'2018-04-05','2018-04-09',1),(10,'War Horse',2011,3,1,2,'2018-04-02','2018-04-06',1),(11,'The Pianist',2002,7,3,6,'2018-04-03','2018-04-07',1),(12,'Intouchables',2011,8,2,7,'2018-04-03','2018-04-07',1),(13,'Forest Gump',1994,6,3,8,'2018-04-03','2018-04-07',1);
 /*!40000 ALTER TABLE `movies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,6 +304,129 @@ LOCK TABLES `movies_has_genre` WRITE;
 INSERT INTO `movies_has_genre` VALUES (1,1),(2,2),(9,2),(10,2),(11,2),(12,2),(13,2),(3,3),(4,3),(5,3),(6,3),(7,3),(8,3),(12,4);
 /*!40000 ALTER TABLE `movies_has_genre` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `rentalstatus`
+--
+
+DROP TABLE IF EXISTS `rentalstatus`;
+/*!50001 DROP VIEW IF EXISTS `rentalstatus`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `rentalstatus` AS SELECT 
+ 1 AS `movieName`,
+ 1 AS `employeeID`,
+ 1 AS `Renter`,
+ 1 AS `rented`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Final view structure for view `listadventuregenre`
+--
+
+/*!50001 DROP VIEW IF EXISTS `listadventuregenre`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `listadventuregenre` AS select `m`.`movieName` AS `movieName`,`g`.`Name` AS `Name` from ((`movies` `m` join `movies_has_genre` `mhg` on((`m`.`movieID` = `mhg`.`movieID`))) join `genre` `g` on((`mhg`.`GenreID` = `g`.`GenreID`))) where (`g`.`Name` = 'Adventure') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `listallemployees`
+--
+
+/*!50001 DROP VIEW IF EXISTS `listallemployees`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `listallemployees` AS select `e`.`employeeID` AS `employeeID`,`e`.`FirstName` AS `FirstName`,`e`.`LastName` AS `LastName`,count(`m`.`employeeID`) AS `Movies_rented` from (`employees` `e` join `movies` `m` on((`m`.`employeeID` = `e`.`employeeID`))) group by `e`.`employeeID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `listallmovies`
+--
+
+/*!50001 DROP VIEW IF EXISTS `listallmovies`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `listallmovies` AS select `m`.`movieID` AS `movieID`,`m`.`movieName` AS `movieName`,`m`.`Year` AS `Year`,group_concat(distinct `d`.`FirstName`,' ',`d`.`LastName` separator ',') AS `Director`,group_concat(distinct `a`.`FirstName`,' ',`a`.`LastName` separator ',') AS `Actors`,`g`.`Name` AS `Genre` from (((((`movies` `m` join `movies_has_actors` `mah` on((`m`.`movieID` = `mah`.`movieID`))) join `actors` `a` on((`mah`.`ActorsID` = `a`.`ActorsID`))) join `movies_has_genre` `mhg` on((`m`.`movieID` = `mhg`.`movieID`))) join `genre` `g` on((`mhg`.`GenreID` = `g`.`GenreID`))) join `directors` `d` on((`m`.`directorsID` = `d`.`DirectorsID`))) group by `m`.`movieID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `listspecificgenre`
+--
+
+/*!50001 DROP VIEW IF EXISTS `listspecificgenre`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `listspecificgenre` AS select `m`.`movieName` AS `movieName`,`g`.`Name` AS `Name` from ((`movies` `m` join `movies_has_genre` `mhg` on((`m`.`movieID` = `mhg`.`movieID`))) join `genre` `g` on((`mhg`.`GenreID` = `g`.`GenreID`))) where (`g`.`Name` = 'Adventure') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `movieoverdue`
+--
+
+/*!50001 DROP VIEW IF EXISTS `movieoverdue`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `movieoverdue` AS select `m`.`movieID` AS `movieID`,`m`.`movieName` AS `movieName`,group_concat(distinct `c`.`FirstName`,' ',`c`.`LastName` separator ',') AS `Customer` from (`movies` `m` join `customers` `c` on((`m`.`customerID` = `c`.`customerID`))) where (curdate() > `m`.`returnDate`) group by `m`.`movieID` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `rentalstatus`
+--
+
+/*!50001 DROP VIEW IF EXISTS `rentalstatus`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `rentalstatus` AS select `m`.`movieName` AS `movieName`,`e`.`employeeID` AS `employeeID`,group_concat(`c`.`FirstName`,' ',`c`.`LastName` separator ',') AS `Renter`,`m`.`rented` AS `rented` from ((`movies` `m` join `customers` `c` on((`c`.`customerID` = `m`.`customerID`))) join `employees` `e` on((`e`.`employeeID` = `m`.`employeeID`))) group by `m`.`movieName` having (`m`.`rented` = 1) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -242,4 +437,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-03 13:26:23
+-- Dump completed on 2018-04-05 13:50:04
