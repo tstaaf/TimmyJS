@@ -25,3 +25,11 @@ INNER JOIN customers c ON c.customerID = m.customerID
 INNER JOIN employees e ON e.employeeID = m.employeeID
 GROUP BY m.movieName
 HAVING m.rented = 1;
+
+-- Fråga 4: Vilka filmer som har gått över tiden, dvs filmer som inte har blivit återlämnade trots att de borde vara det, tillsammans med namnet på kunden som har hyrt den.
+
+SELECT m.movieID, m.movieName, GROUP_CONCAT(distinct FirstName, ' ', LastName) Customer
+FROM movies m
+INNER JOIN customers c ON m.customerID = c.customerID
+WHERE curdate() > returnDate
+GROUP BY m.movieID;
