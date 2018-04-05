@@ -33,3 +33,10 @@ FROM movies m
 INNER JOIN customers c ON m.customerID = c.customerID
 WHERE curdate() > returnDate
 GROUP BY m.movieID;
+
+-- Fråga 5: En lista över alla anställda och hur många filmer varje anställd har hyrt ut.
+
+SELECT e.employeeID, e.FirstName, e.LastName, count(m.employeeID) Movies_rented
+FROM employees e
+INNER JOIN movies m ON m.employeeID = e.employeeID
+GROUP BY e.employeeID;
