@@ -40,3 +40,7 @@ SELECT e.employeeID, e.FirstName, e.LastName, count(m.employeeID) Movies_rented
 FROM employees e
 INNER JOIN movies m ON m.employeeID = e.employeeID
 GROUP BY e.employeeID;
+
+-- Fråga 7: En Stored Procedure som ska köras när en film lämnas ut. Ska alltså sätta filmen till uthyrd, vem som hyrt den osv.
+
+CALL rent_out_movie(movieID, customerID, employeeID);
