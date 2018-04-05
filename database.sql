@@ -245,7 +245,7 @@ CREATE TABLE `movies` (
 
 LOCK TABLES `movies` WRITE;
 /*!40000 ALTER TABLE `movies` DISABLE KEYS */;
-INSERT INTO `movies` VALUES (1,'A Quiet Place',2018,5,2,1,'2018-04-05','2018-04-09',1),(2,'Saving Private Ryan',1998,1,1,2,'2018-04-01','2018-04-05',1),(3,'Star Wars: Episode IV - A New Hope',1977,3,1,3,'2018-04-02','2018-04-06',1),(4,'Star Wars: Episode V - The Empire Strikes Back',1980,3,1,4,'2018-04-02','2018-04-06',1),(5,'Star Wars: Episode VI - Return of the Jedi',1983,NULL,1,5,NULL,NULL,0),(6,'Raiders of the Lost Ark',1981,2,2,2,'2018-03-30','2018-04-03',1),(7,'Indiana Jones and the Temple of Doom',1984,2,2,2,'2018-03-30','2018-04-03',1),(8,'Indiana Jones and the Last Crusade',1989,2,2,2,'2018-03-30','2018-04-03',1),(9,'Schindler\'s List',1993,1,1,2,'2018-04-05','2018-04-09',1),(10,'War Horse',2011,3,1,2,'2018-04-02','2018-04-06',1),(11,'The Pianist',2002,7,3,6,'2018-04-03','2018-04-07',1),(12,'Intouchables',2011,8,2,7,'2018-04-03','2018-04-07',1),(13,'Forest Gump',1994,6,3,8,'2018-04-03','2018-04-07',1);
+INSERT INTO `movies` VALUES (1,'A Quiet Place',2018,5,2,1,'2018-04-05','2018-04-09',1),(2,'Saving Private Ryan',1998,1,1,2,'2018-04-01','2018-04-05',1),(3,'Star Wars: Episode IV - A New Hope',1977,3,1,3,'2018-04-02','2018-04-06',1),(4,'Star Wars: Episode V - The Empire Strikes Back',1980,3,1,4,'2018-04-02','2018-04-06',1),(5,'Star Wars: Episode VI - Return of the Jedi',1983,NULL,1,5,NULL,NULL,0),(6,'Raiders of the Lost Ark',1981,2,2,2,'2018-03-30','2018-04-03',1),(7,'Indiana Jones and the Temple of Doom',1984,2,2,2,'2018-03-30','2018-04-03',1),(8,'Indiana Jones and the Last Crusade',1989,2,2,2,'2018-03-30','2018-04-03',1),(9,'Schindler\'s List',1993,8,2,2,'2018-04-05','2018-04-08',1),(10,'War Horse',2011,3,1,2,'2018-04-02','2018-04-06',1),(11,'The Pianist',2002,7,3,6,'2018-04-03','2018-04-07',1),(12,'Intouchables',2011,8,2,7,'2018-04-03','2018-04-07',1),(13,'Forest Gump',1994,6,3,8,'2018-04-03','2018-04-07',1);
 /*!40000 ALTER TABLE `movies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,6 +319,36 @@ SET character_set_client = utf8;
  1 AS `Renter`,
  1 AS `rented`*/;
 SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping routines for database 'timmyjs'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `rent_out_movie` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `rent_out_movie`(
+r_movieID INT,
+r_customerID INT,
+r_employeeID INT)
+BEGIN
+
+UPDATE movies m
+SET m.customerID = r_customerID, m.employeeID = r_employeeID, m.rented = 1, rentDate = curdate(), returnDate = curdate() + 3
+WHERE r_movieID = m.movieID;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `listadventuregenre`
@@ -437,4 +467,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-05 13:50:04
+-- Dump completed on 2018-04-05 14:07:56
