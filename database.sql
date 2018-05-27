@@ -455,7 +455,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `rentalstatus` AS select `m`.`movieName` AS `movieName`,`e`.`employeeID` AS `employeeID`,group_concat(`c`.`FirstName`,' ',`c`.`LastName` separator ',') AS `Renter`,`m`.`rented` AS `rented` from ((`movies` `m` join `customers` `c` on((`c`.`customerID` = `m`.`customerID`))) join `employees` `e` on((`e`.`employeeID` = `m`.`employeeID`))) group by `m`.`movieName` having (`m`.`rented` = 1) */;
+/*!50001 VIEW `rentalstatus` AS select `m`.`movieName` AS `movieName`,`e`.`employeeID` AS `employeeID`, `e`.`FirstName` AS `Employee`,group_concat(`c`.`FirstName`,' ',`c`.`LastName` separator ',') AS `Renter`,`m`.`rented` AS `rented` from ((`movies` `m` join `customers` `c` on((`c`.`customerID` = `m`.`customerID`))) join `employees` `e` on((`e`.`employeeID` = `m`.`employeeID`))) group by `m`.`movieName` having (`m`.`rented` = 1) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;

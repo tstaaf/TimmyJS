@@ -20,7 +20,9 @@ SELECT * FROM listallemployees;
 
 -- Fråga 7: En Stored Procedure som ska köras när en film lämnas ut. Ska alltså sätta filmen till uthyrd, vem som hyrt den osv.
 
-CALL rent_out_movie(movieID, customerID, employeeID);
+CALL rent_out_movie(5, 3, 2);
+
+
 
 
 
