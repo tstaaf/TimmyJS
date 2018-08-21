@@ -114,7 +114,7 @@ CREATE TABLE `employees` (
 
 LOCK TABLES `employees` WRITE;
 /*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'Max','Nilsson'),(2,'Tom','Nilsson'),(3,'Julia','Lindell');
+INSERT INTO `employees` VALUES (1,'Max','Nilsson'),(2,'Tom','Nilsson'),(3,'Julia','Lindell'),(4,'Erik','Jonsson');
 /*!40000 ALTER TABLE `employees` ENABLE KEYS */;
 UNLOCK TABLES;
 
