@@ -383,7 +383,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `listallemployees` AS select `e`.`employeeID` AS `employeeID`,`e`.`FirstName` AS `FirstName`,`e`.`LastName` AS `LastName`,count(`m`.`employeeID`) AS `Movies_rented` from (`employees` `e` join `movies` `m` on((`m`.`employeeID` = `e`.`employeeID`))) group by `e`.`employeeID` */;
+/*!50001 VIEW `listallemployees` AS select `e`.`employeeID` AS `employeeID`,`e`.`FirstName` AS `FirstName`,`e`.`LastName` AS `LastName`,count(`m`.`employeeID`) AS `Movies_rented` from (`employees` `e` left join `movies` `m` on((`m`.`employeeID` = `e`.`employeeID`))) group by `e`.`employeeID` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
